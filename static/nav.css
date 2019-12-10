@@ -1,0 +1,33 @@
+nav {
+  background-color: #01295F;
+  justify-content: space-between;
+  display: flex;
+  transition: all 0.5s ease-in-out;
+}
+
+nav h1 {
+  font-size: 24px;
+  padding: 20px;
+  color: #DDD92A;
+  text-align: left;
+  display: inline-block;
+}
+
+.topnav-links {
+  display: flex;
+  justify-content: center;
+  color: #DDD92A;
+  float: right;
+  padding: 20px;
+}
+
+.topnav-links a {
+  margin-left: 20px;
+  font-size: 16px;
+  transition: all 0.5s ease-in-out;
+}
+
+.topnav-links a:hover {
+  background-color: #DDD92A;
+  color: #01295F;
+}

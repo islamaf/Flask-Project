@@ -1,0 +1,77 @@
+.flashes {
+  text-align: center;
+  font-style: oblique;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.container-items {
+  border-radius: 10px 10px 10px 10px;
+  padding: 30px;
+  width: 80%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  text-align: center;
+}
+
+.container-items h1 {
+  font-style: oblique;
+  color: #DDD92A;
+  background-color: #01295F;
+  border-bottom: 2px solid #DDD92A;
+}
+
+input[type=text], input[type=username], input[type=password],
+input[type=email] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 85%;
+  border: 2px solid #f6f6f6;
+  transition: all 0.5s ease-in-out;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=text]:focus, input[type=username]:focus, input[type=email]:focus, input[type=password]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #5fbae9;
+}
+
+input[type=text]:hover, input[type=username]:hover, input[type=email]:hover, input[type=password]:hover {
+  background-color: #fff;
+}
+
+input[type=submit] {
+  background-color: #01295F;
+  border: none;
+  color: white;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 5px 20px 40px 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+input[type=submit]:hover {
+  background-color: #DDD92A;
+}
