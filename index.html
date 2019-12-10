@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Your book marker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='reset_flask.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='article.css') }}">
+  </head>
+  <body>
+    <nav>
+      <h1>The Book Marker</h1>
+      <ul class="topnav-links">
+        <li>
+          <a href="#">About us</a>
+        </li>
+        <li>
+          <a href="#">Books</a>
+        </li>
+        <li>
+          <a href="#">Articles</a>
+        </li>
+        <li>
+          <a href="#">Our Picks</a>
+        </li>
+        <li>
+          {% if session['logged_in'] %}
+          <a href="{{ url_for('logout') }}">Log out</a>
+          {% else %}
+          <a href="{{ url_for('go_login') }}">Log in</a>
+          {% endif %}
+        </li>
+      </ul>
+    </nav>
+    <article>
+      <div class="quote">
+        <h2>“Until I feared I would lose it, I never loved to read. One does not love breathing.” – Harper Lee</h2>
+      </div>
+      <br>
+      <div class="info">
+        <div class="headers">
+          <h2>What is this platform?</h2>
+        </div>
+        <p><b>The Book Marker </b>is a platform for the community. Main aim is to make reading come more in handy,
+        try not to waste time reading some useless and off the edge content. Here, we are working as hard as possible
+        to make your reading life easier. Stick to us, stick to your library.</p>
+      </div>
+      <br>
+      <div class="recommendations">
+        <div class="headers">
+          <h2>Our recommendations</h2>
+        </div>
+        <p><b>Note that</b> information displayed on this website has been parrsed from other websites,
+          some are big and some aren't. We connect you.</p>
+      </div>
+    </article>
+  </body>
+</html>
