@@ -1,0 +1,59 @@
+html {
+  font: 20px/1.2;
+  background-color: #FB3640;
+
+  /*
+  font-family: 'Cairo', sans-serif;
+  font-family: 'Literata', serif;
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Raleway', sans-serif;
+ */
+ /* Photo by Kari Shea on Unsplash */
+}
+
+body, body * {
+  margin:          unset;
+  box-sizing:      unset;
+  padding:         unset;
+  font-size:       unset;
+  color:           unset;
+  text-decoration: unset;
+  list-style:      none;
+}
+
+/* Headers justifications */
+.headers {
+  display: flex;
+  justify-content: center;
+}
+
+/* Scale Text */
+.grow {
+  transition: all 1s ease-in-out;
+}
+
+.grow:hover {
+  transform: scale(1.1);
+}
+
+/* fade */
+.fade
+{
+  opacity:0.7;
+}
+
+.fade:hover
+{
+  opacity:1;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+.row:atfer {
+  content: "";
+  display: table;
+  clear: both;
+}
