@@ -4,8 +4,10 @@ from flask import Flask, render_template, redirect, url_for, request, session, f
 from passlib.hash import sha512_crypt
 from sqlalchemy.orm import sessionmaker
 
+from bs4 import BeautifulSoup
+import requests
+
 from register import *
-from tabledef import *
 
 engine = create_engine('sqlite:///stronger.db', pool_pre_ping=True)
 Session = sessionmaker(bind=engine)
@@ -15,27 +17,39 @@ app = Flask(__name__, template_folder='templates')
 
 @app.route('/')
 @app.route('/index')
-def home():
-    return render_template("index.html")
+def home(post=1):
+    return render_template("index.html", username=post)
+
+@app.route('/featured_books')
+def featured_books(post=1):
+    web_url = "https://www.sfwa.org/featured-books/"
+    web_request = requests.get(web_url)
+    soup = BeautifulSoup(web_request.text, 'html.parser')
+
+    book_titles = []
+    for i in soup.findAll("article", class_="has-post-thumbnail"):
+        book_titles.append(i.div.h2.a.get('title'))
+
+    images = []
+    for i in soup.findAll("article", class_="has-post-thumbnail"):
+        images.append(i.img.get('src'))
+
+    links_to_web = []
+    for i in soup.findAll("article", class_="has-post-thumbnail"):
+        links_to_web.append(i.div.h2.a.get('href'))
+
+    return render_template("featured_books.html", book_titles=book_titles, images=images, len=len(images), links_to_web=links_to_web)
 
 @app.route('/login')
 def go_login():
     return render_template("login.html")
 
 @app.route('/login')
-def login():
+def login(post=1):
     if not session.get('logged_in'):
-        return render_template("login.html")
+        return render_template("login.html", username=post)
     else:
-        return home()
-
-# @app.route('/login', methods=['GET', 'POST'])
-# def do_login():
-#     if request.form['password'] == 'password' and request.form['username'] == 'admin':
-#         session['logged_in'] = True
-#     else:
-#         flash('wrong password!')
-#     return home()
+        return home(post)
 
 @app.route('/login', methods=['POST'])
 def do_login():
@@ -51,7 +65,7 @@ def do_login():
         session['logged_in'] = True
     else:
         flash('Wrong password!')
-    return login()
+    return login(POST_USERNAME)
 
 @app.route("/logout")
 def logout():
@@ -83,18 +97,6 @@ def signup():
             flash("User already exists, please login or contact admin", "danger")
             return render_template('login.html')
     return render_template('signup.html')
-
-# @app.route('/signup', methods=['GET', 'POST'])
-# def signup():
-#     if request.method == 'POST':
-#         # do stuff when the form is submitted
-#
-#         # redirect to end the POST handling
-#         # the redirect can be to the same route or somewhere else
-#         return redirect(url_for('home'))
-#
-#         # show the form, it wasn't submitted
-#     return render_template('signup.html')
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
