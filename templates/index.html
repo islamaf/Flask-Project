@@ -15,7 +15,7 @@
           <a href="#">About us</a>
         </li>
         <li>
-          <a href="#">Books</a>
+          <a href="{{ url_for('featured_books') }}">Books</a>
         </li>
         <li>
           <a href="#">Articles</a>
@@ -23,11 +23,16 @@
         <li>
           <a href="#">Our Picks</a>
         </li>
+        {% if session['logged_in'] %}
+          <li>
+            <p>Hi, {{ username }}!</p>
+          </li>
+        {% endif %}
         <li>
           {% if session['logged_in'] %}
-          <a href="{{ url_for('logout') }}">Log out</a>
+            <a href="{{ url_for('logout') }}"> Log out</a>
           {% else %}
-          <a href="{{ url_for('go_login') }}">Log in</a>
+            <a href="{{ url_for('go_login') }}">Log in</a>
           {% endif %}
         </li>
       </ul>
