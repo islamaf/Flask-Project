@@ -1,0 +1,55 @@
+.books-main-container {
+  margin-left: 25px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+  min-height: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.books-main h1 {
+  font-size: 23px;
+  color: #DDD92A;
+  background-color: #01295F;
+  border-bottom: 2px solid #DDD92A;
+}
+
+.books-main a {
+  display: block;
+  font-size: 20px;
+  color: #DDD92A;
+}
+
+.books-main a:hover {
+  font-style: oblique;
+  color: #01295F;
+}
+
+.container {
+  margin: 20px;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+}
+
+.container img {
+  margin: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 264px;
+  height: 408px;
+  /* width: 50%; */
+}
+
+.container p {
+  color: black;
+  padding: 20px;
+  font-style: oblique;
+  word-wrap: break-word;
+  text-align: center;
+}
