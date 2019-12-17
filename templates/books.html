@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Your book marker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='reset_flask.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='books.css') }}">
+  </head>
+  <body>
+    <nav>
+      <h1>The Book Marker</h1>
+      <ul class="topnav-links">
+        <li>
+          <a href="{{ url_for('home') }}">Home</a>
+        </li>
+        <li>
+          <a href="#">About us</a>
+        </li>
+        <li>
+          <a href="{{ url_for('books') }}">Books</a>
+        </li>
+        <li>
+          <a href="#">Articles</a>
+        </li>
+        <li>
+          <a href="#">Our Picks</a>
+        </li>
+        {% if session['logged_in'] %}
+          <li>
+            <p>Hi, {{ username }}!</p>
+          </li>
+        {% endif %}
+        <li>
+          {% if session['logged_in'] %}
+            <a href="{{ url_for('logout') }}"> Log out</a>
+          {% else %}
+            <a href="{{ url_for('go_login') }}">Log in</a>
+          {% endif %}
+        </li>
+      </ul>
+    </nav>
+    <article class="books-main-container">
+      <div class="books-main">
+        <h1>Here are the websites we get the data from:</h1>
+        <a href="{{ url_for('sfwa_books') }}">SFWA</a>
+        <a href="{{ url_for('yabook_books') }}">Yabookscentral</a>
+        <a href="{{ url_for('bookchor_books') }}">Bookchor</a>
+      </div>
+    </article>
+  </body>
+</html>

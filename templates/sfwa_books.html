@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Your book marker - SFWA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='reset_flask.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='books.css') }}">
+  </head>
+  <body>
+    <nav>
+      <h1>The Book Marker</h1>
+      <ul class="topnav-links">
+        <li>
+          <a href="{{ url_for('home') }}">Home</a>
+        </li>
+        <li>
+          <a href="#">About us</a>
+        </li>
+        <li>
+          <a href="{{ url_for('books') }}">Books</a>
+        </li>
+        <li>
+          <a href="#">Articles</a>
+        </li>
+        <li>
+          <a href="#">Our Picks</a>
+        </li>
+        {% if session['logged_in'] %}
+          <li>
+            <p>Hi, {{ username }}!</p>
+          </li>
+        {% endif %}
+        <li>
+          {% if session['logged_in'] %}
+            <a href="{{ url_for('logout') }}"> Log out</a>
+          {% else %}
+            <a href="{{ url_for('go_login') }}">Log in</a>
+          {% endif %}
+        </li>
+      </ul>
+    </nav>
+    <article>
+      {% for i in range(0, len) %}
+      <div class="container">
+        <form action="/bookmark" method="POST">
+          <a href="{{ links_to_web[i] }}"><img name="book_image" src="{{ images[i] }}"></a>
+          <p name="book_name">{{ book_titles[i] }}</p>
+          {% if session['logged_in'] %}
+            <input type="submit" name="submit-bookmark" value="Bookmark">
+          {% endif %}
+        </form>
+      </div>
+      {% endfor %}
+    </article>
+  </body>
+</html>
