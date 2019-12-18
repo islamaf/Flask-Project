@@ -45,8 +45,12 @@
         {% if session['logged_in'] %}
         <h1>Enter the index of the book and click bookmark!</h1>
         <br>
-        <input type="text" name="index" value="">
+        <input type="text" name="index" placeholder="Book Index" value="">
         <input type="submit" name="submit-bookmark" value="Bookmark">
+        <p>Rate here:</p>
+        <input type="text" name="rating_index" placeholder="Book Index" value="">
+        <input type="number" name="rating" placeholder="Rate from 1-5">
+        <input type="submit" name="rate_submit" value="Submit rating">
         {% endif %}
       </form>
       {% for i in range(0, len) %}
@@ -54,6 +58,8 @@
         <p>{{ id_result[i] }}</p>
         <a href="{{ links_to_web[i] }}"><img src="{{ images[i] }}"></a>
         <p>{{ book_titles[i] }}</p>
+        <p>{{ rating }}</p>
+        <p>{{ rating_avg }}</p>
       </div>
       {% endfor %}
     </article>
