@@ -123,9 +123,23 @@ def sfwa_books():
 
     id_query = s.query(SFWA.id)
     id_result = id_query.all()
-    out = [item for id in id_result for item in id]
+    id_out = [item for id in id_result for item in id]
 
-    return render_template("sfwa_books.html", id_result=out, username=loggedin_user, book_titles=book_titles, images=images, len=len(images), links_to_web=links_to_web)
+    rating_out = []
+    for i in range(1, 11):
+        rating_query = s.query(Ratings.rating).filter(Ratings.sfwa_id)
+        rating_query_res = rating_query.all()
+        rating_out = [item for rate in rating_query_res for item in rate]
+    if len(rating_out) == 0:
+        return render_template("sfwa_books.html", id_result=id_out, username=loggedin_user, book_titles=book_titles,
+                               images=images, len=len(images), links_to_web=links_to_web)
+    else:
+        rating_avg = sum(rating_out) / len(rating_out)
+        rating_avg = round(rating_avg, 2)
+        return render_template("sfwa_books.html", rating=rating_out, rating_avg=rating_avg, id_result=id_out,
+                               username=loggedin_user,
+                               book_titles=book_titles, images=images, len=len(images), links_to_web=links_to_web)
+
 
 @app.route('/yabook_books')
 def yabook_books():
@@ -162,9 +176,21 @@ def yabook_books():
 
     id_query = s.query(YABOOK.id)
     id_result = id_query.all()
-    out = [item for id in id_result for item in id]
+    id_out = [item for id in id_result for item in id]
 
-    return render_template("yabook_books.html", id_result=out, username=loggedin_user, book_titles=book_titles, images=images, len=len(images), links_to_web=links_to_web)
+    rating_out = []
+    for i in range(1, 11):
+        rating_query = s.query(Ratings.rating).filter(Ratings.yabook_id)
+        rating_query_res = rating_query.all()
+        rating_out = [item for rate in rating_query_res for item in rate]
+    if len(rating_out) == 0:
+        return render_template("yabook_books.html", id_result=id_out, username=loggedin_user, book_titles=book_titles,
+                               images=images, len=len(images),  links_to_web=links_to_web)
+    else:
+        rating_avg = sum(rating_out) / len(rating_out)
+        rating_avg = round(rating_avg, 2)
+        return render_template("yabook_books.html", rating=rating_out, rating_avg=rating_avg, id_result=id_out, username=loggedin_user,
+                               book_titles=book_titles, images=images, len=len(images), links_to_web=links_to_web)
 
 @app.route('/bookchor_books')
 def bookchor_books():
@@ -204,9 +230,22 @@ def bookchor_books():
 
     id_query = s.query(BOOKCHOR.id)
     id_result = id_query.all()
-    out = [item for id in id_result for item in id]
+    id_out = [item for id in id_result for item in id]
 
-    return render_template("bookchor_books.html", id_result=out, username=loggedin_user, book_titles=book_titles, images=images, len=len(images), links_to_web=links_to_web)
+    rating_out = []
+    for i in range(1, 11):
+        rating_query = s.query(Ratings.rating).filter(Ratings.bookchor_id)
+        rating_query_res = rating_query.all()
+        rating_out = [item for rate in rating_query_res for item in rate]
+    if len(rating_out) == 0:
+        return render_template("bookchar_books.html", id_result=id_out, username=loggedin_user, book_titles=book_titles,
+                               images=images, len=len(images), links_to_web=links_to_web)
+    else:
+        rating_avg = sum(rating_out) / len(rating_out)
+        rating_avg = round(rating_avg, 2)
+        return render_template("bookchar_books.html", rating=rating_out, rating_avg=rating_avg, id_result=id_out,
+                               username=loggedin_user,
+                               book_titles=book_titles, images=images, len=len(images), links_to_web=links_to_web)
 
 @app.route('/sfwa_bookmark', methods=['GET', 'POST'])
 def sfwa_bookmark():
@@ -214,16 +253,24 @@ def sfwa_bookmark():
 
     if request.method == 'POST':
         index = request.form['index']
+        rating_index = request.form['rating_index']
+        rating = request.form.get('rating')
 
         Session = sessionmaker(bind=engine)
         s = Session()
         query = s.query(Bookmark).filter(Bookmark.user_id.in_([loggedin_user]), Bookmark.sfwa_id.in_([index]))
         result = query.first()
         if result is None:
-            bookmark_no = Bookmark(user_id=loggedin_user, sfwa_id=index)
-            db.add(bookmark_no)
-            db.commit()
-            return redirect(url_for('sfwa_books'))
+            if '0' < rating < '6':
+                ratings_no = Ratings(sfwa_id=rating_index, rating=rating)
+                db.add(ratings_no)
+                db.commit()
+                return redirect(url_for('sfwa_books'))
+            else:
+                bookmark_no = Bookmark(user_id=loggedin_user, sfwa_id=index)
+                db.add(bookmark_no)
+                db.commit()
+                return redirect(url_for('sfwa_books'))
         else:
             flash("Already bookmarked")
             return redirect(url_for('sfwa_books'))
@@ -235,16 +282,24 @@ def yabook_bookmark():
 
     if request.method == 'POST':
         index = request.form['index']
+        rating_index = request.form['rating_index']
+        rating = request.form.get('rating')
 
         Session = sessionmaker(bind=engine)
         s = Session()
         query = s.query(Bookmark).filter(Bookmark.user_id.in_([loggedin_user]), Bookmark.yabook_id.in_([index]))
         result = query.first()
         if result is None:
-            bookmark_no = Bookmark(user_id=loggedin_user, yabook_id=index)
-            db.add(bookmark_no)
-            db.commit()
-            return redirect(url_for('yabook_books'))
+            if '0' < rating < '6':
+                ratings_no = Ratings(sfwa_id=rating_index, rating=rating)
+                db.add(ratings_no)
+                db.commit()
+                return redirect(url_for('yabook_books'))
+            else:
+                bookmark_no = Bookmark(user_id=loggedin_user, sfwa_id=index)
+                db.add(bookmark_no)
+                db.commit()
+                return redirect(url_for('yabook_books'))
         else:
             flash("Already bookmarked")
             return redirect(url_for('yabook_books'))
@@ -253,6 +308,8 @@ def yabook_bookmark():
 @app.route('/bookchor_bookmark', methods=['GET', 'POST'])
 def bookchor_bookmark():
     loggedin_user = session.get("username")
+    rating_index = request.form['rating_index']
+    rating = request.form.get('rating')
 
     if request.method == 'POST':
         index = request.form['index']
@@ -262,10 +319,16 @@ def bookchor_bookmark():
         query = s.query(Bookmark).filter(Bookmark.user_id.in_([loggedin_user]), Bookmark.bookchor_id.in_([index]))
         result = query.first()
         if result is None:
-            bookmark_no = Bookmark(user_id=loggedin_user, bookchor_id=index)
-            db.add(bookmark_no)
-            db.commit()
-            return redirect(url_for('bookchor_books'))
+            if '0' < rating < '6':
+                ratings_no = Ratings(sfwa_id=rating_index, rating=rating)
+                db.add(ratings_no)
+                db.commit()
+                return redirect(url_for('bookchor_books'))
+            else:
+                bookmark_no = Bookmark(user_id=loggedin_user, sfwa_id=index)
+                db.add(bookmark_no)
+                db.commit()
+                return redirect(url_for('bookchor_books'))
         else:
             flash("Already bookmarked")
             return redirect(url_for('bookchor_books'))
