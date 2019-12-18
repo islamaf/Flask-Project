@@ -19,6 +19,19 @@ class Bookmark(Base):
         return "<Bookmark(user_id={}, sfwa_id={}, yabook_id={}, bookchor_id={})>" \
             .format(self.user_id, self.sfwa_id, self.yabook_id, self.bookchor_id)
 
+class Ratings(Base):
+    __tablename__ = "ratings"
+
+    id = Column(Integer, primary_key=True)
+    sfwa_id = Column(Integer)
+    yabook_id = Column(Integer)
+    bookchor_id = Column(Integer)
+    rating = Column(Integer)
+
+    def __repr__(self):
+        return "<Bookmark(sfwa_id={}, yabook_id={}, bookchor_id={}, rating={})>" \
+            .format(self.user_id, self.sfwa_id, self.yabook_id, self.bookchor_id, self.rating)
+
 class SFWA(Base):
     __tablename__ = "sfwa"
 
