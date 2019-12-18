@@ -41,10 +41,19 @@
       </ul>
     </nav>
     <article>
+      <form class="bookmarking-form" action="/yabook_bookmark" method="POST">
+        {% if session['logged_in'] %}
+        <h1>Enter the index of the book and click bookmark!</h1>
+        <br>
+        <input type="text" name="index" value="">
+        <input type="submit" name="submit-bookmark" value="Bookmark">
+        {% endif %}
+      </form>
       {% for i in range(0, len) %}
       <div class="container">
-          <a href="{{ links_to_web[i] }}"><img src="{{ images[i] }}"></a>
-          <p>{{ book_titles[i] }}</p>
+        <p>{{ id_result[i] }}</p>
+        <a href="{{ links_to_web[i] }}"><img name="book_image" src="{{ images[i] }}"></a>
+        <p name="book_name">{{ book_titles[i] }}</p>
       </div>
       {% endfor %}
     </article>
