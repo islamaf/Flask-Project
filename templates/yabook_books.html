@@ -28,7 +28,7 @@
         </li>
         {% if session['logged_in'] %}
           <li>
-            <p>Hi, {{ username }}!</p>
+            <a href="{{ url_for('user_profile') }}">Hi, {{ username }}!</a>
           </li>
         {% endif %}
         <li>
@@ -52,8 +52,8 @@
       {% for i in range(0, len) %}
       <div class="container">
         <p>{{ id_result[i] }}</p>
-        <a href="{{ links_to_web[i] }}"><img name="book_image" src="{{ images[i] }}"></a>
-        <p name="book_name">{{ book_titles[i] }}</p>
+        <a href="{{ links_to_web[i] }}"><img src="{{ images[i] }}"></a>
+        <p>{{ book_titles[i] }}</p>
       </div>
       {% endfor %}
     </article>
