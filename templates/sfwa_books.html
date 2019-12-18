@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Your book marker - SFWA</title>
+    <title>Your book marker - Yabookscentral</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='reset_flask.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='books.css') }}">
@@ -41,16 +41,12 @@
       </ul>
     </nav>
     <article>
-      <form class="bookmarking-form" action="/sfwa_bookmark" method="POST">
+      <form class="bookmarking-form" action="/yabook_bookmark" method="POST">
         {% if session['logged_in'] %}
         <h1>Enter the index of the book and click bookmark!</h1>
         <br>
-        <input type="text" name="index" placeholder="Book Index" value="">
+        <input type="text" name="index" value="">
         <input type="submit" name="submit-bookmark" value="Bookmark">
-        <p>Rate here:</p>
-        <input type="text" name="rating_index" placeholder="Book Index" value="">
-        <input type="number" name="rating" placeholder="Rate from 1-5">
-        <input type="submit" name="rate_submit" value="Submit rating">
         {% endif %}
       </form>
       {% for i in range(0, len) %}
