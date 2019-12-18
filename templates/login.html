@@ -36,11 +36,16 @@
         <li>
           <a href="#">Our Picks</a>
         </li>
+        {% if session['logged_in'] %}
+          <li>
+            <a href="{{ url_for('user_profile') }}">Hi, {{ username }}!</a>
+          </li>
+        {% endif %}
         <li>
           {% if session['logged_in'] %}
-          <a href="{{ url_for('logout') }}">Log out</a>
+            <a href="{{ url_for('logout') }}"> Log out</a>
           {% else %}
-          <a href="{{ url_for('go_login') }}">Log in</a>
+            <a href="{{ url_for('go_login') }}">Log in</a>
           {% endif %}
         </li>
       </ul>
