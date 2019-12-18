@@ -5,7 +5,7 @@
     <title>Your book marker - {{ username }} profile</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='reset_flask.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='article.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='books.css') }}">
   </head>
   <body>
     <nav>
@@ -28,7 +28,7 @@
         </li>
         {% if session['logged_in'] %}
           <li>
-            <p>Hi, {{ username }}!</p>
+            <a href="{{ url_for('user_profile') }}">Hi, {{ username }}!</a>
           </li>
         {% endif %}
         <li>
@@ -48,11 +48,31 @@
         <h1>Name: {{ name }}</h1>
         <h1>Email: {{ email }}</h1>
 
-        <p>{{ sfwa_books }}</p>
-        <br>
-        <p>{{ yabook_books }}</p>
-        <br>
-        <p>{{ bookchor_books }}</p>
+        <div class="row">
+          <div class="column">
+            <h1>SFWA</h1>
+            {% for i in range(0, sfwa_len) %}
+              <a href="{{ sfwa_links[i] }}"><img src="{{ sfwa_images[i] }}"></a>
+              <p>{{ sfwa_names[i] }}</p>
+            {% endfor %}
+          </div>
+
+          <div class="column">
+            <h1>YABOOK</h1>
+            {% for i in range(0, yabook_len) %}
+              <a href="{{ yabook_links[i] }}"><img src="{{ yabook_images[i] }}"></a>
+              <p>{{ yabook_names[i] }}</p>
+            {% endfor %}
+          </div>
+
+          <div class="column">
+            <h1>BOOKCHOR</h1>
+            {% for i in range(0, bookchor_len) %}
+              <a href="{{ bookchor_links[i] }}"><img src="{{ bookchor_images[i] }}"></a>
+              <p>{{ bookchor_names[i] }}</p>
+            {% endfor %}
+          </div>
+        </div>
       </div>
     </article>
   </body>
