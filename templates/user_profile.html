@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Your book marker - {{ username }} profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='reset_flask.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='article.css') }}">
+  </head>
+  <body>
+    <nav>
+      <h1>The Book Marker</h1>
+      <ul class="topnav-links">
+        <li>
+          <a href="{{ url_for('home') }}">Home</a>
+        </li>
+        <li>
+          <a href="#">About us</a>
+        </li>
+        <li>
+          <a href="{{ url_for('books') }}">Books</a>
+        </li>
+        <li>
+          <a href="#">Articles</a>
+        </li>
+        <li>
+          <a href="#">Our Picks</a>
+        </li>
+        {% if session['logged_in'] %}
+          <li>
+            <p>Hi, {{ username }}!</p>
+          </li>
+        {% endif %}
+        <li>
+          {% if session['logged_in'] %}
+            <a href="{{ url_for('logout') }}"> Log out</a>
+          {% else %}
+            <a href="{{ url_for('go_login') }}">Log in</a>
+          {% endif %}
+        </li>
+      </ul>
+    </nav>
+    <article>
+      <div class="greetings">
+        <h1>Hey, {{ username }}!</h1>
+        <p>Here, you will find your personal information and all the bookmarked books that you have done.</p>
+
+        <h1>Name: {{ name }}</h1>
+        <h1>Email: {{ email }}</h1>
+
+        <p>{{ sfwa_books }}</p>
+        <br>
+        <p>{{ yabook_books }}</p>
+        <br>
+        <p>{{ bookchor_books }}</p>
+      </div>
+    </article>
+  </body>
+</html>
