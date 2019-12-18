@@ -25,7 +25,7 @@
         </li>
         {% if session['logged_in'] %}
           <li>
-            <p>Hi, {{ username }}!</p>
+            <a href="{{ url_for('user_profile') }}">Hi, {{ username }}!</a>
           </li>
         {% endif %}
         <li>
