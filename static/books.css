@@ -1,3 +1,16 @@
+.bookmarking-form {
+  margin: 25px;
+  display: block;
+}
+
+.bookmarking-form h1 {
+  font-size: 23px;
+  color: #DDD92A;
+  background-color: #01295F;
+  border-bottom: 2px solid #DDD92A;
+  display: block;
+}
+
 .books-main-container {
   margin-left: 25px;
   display: flex;
