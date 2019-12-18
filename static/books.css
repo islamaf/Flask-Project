@@ -11,6 +11,28 @@
   display: block;
 }
 
+.row {
+  display: flex;
+  margin-left: 120px;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 20px;
+}
+
+.column img{
+  width: 264px;
+  height: 408px;
+}
+
+.column p {
+  word-wrap: break-word;
+  text-align: center;
+  width: 45%;
+  padding-bottom: 20px;
+}
+
 .books-main-container {
   margin-left: 25px;
   display: flex;
