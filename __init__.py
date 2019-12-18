@@ -37,19 +37,48 @@ def user_profile():
     name_out = ''.join(name_out)
 
     # SFWA
-    sfwa_vals = s.query(SFWA).filter(Bookmark.sfwa_id == SFWA.id)
-    sfwa_vals_final = sfwa_vals.all()
+    sfwa_vals_names = s.query(SFWA.name).filter(Bookmark.sfwa_id == SFWA.id)
+    sfwa_vals_n_final = sfwa_vals_names.all()
+    sfwa_vals_n_list = [item for letter in sfwa_vals_n_final for item in letter]
+
+    sfwa_vals_images = s.query(SFWA.image).filter(Bookmark.sfwa_id == SFWA.id)
+    sfwa_vals_i_final = sfwa_vals_images.all()
+    sfwa_vals_i_list = [item for letter in sfwa_vals_i_final for item in letter]
+
+    sfwa_vals_links = s.query(SFWA.name).filter(Bookmark.sfwa_id == SFWA.id)
+    sfwa_vals_l_final = sfwa_vals_links.all()
+    sfwa_vals_l_list = [item for letter in sfwa_vals_l_final for item in letter]
 
     # YABOOK
-    yabook_vals = s.query(YABOOK).filter(Bookmark.yabook_id == YABOOK.id)
-    yabook_vals_final = yabook_vals.all()
+    yabook_vals_names = s.query(YABOOK.name).filter(Bookmark.yabook_id == YABOOK.id)
+    yabook_vals_n_final = yabook_vals_names.all()
+    yabook_vals_n_list = [item for letter in yabook_vals_n_final for item in letter]
+
+    yabook_vals_images = s.query(YABOOK.image).filter(Bookmark.yabook_id == YABOOK.id)
+    yabook_vals_i_final = yabook_vals_images.all()
+    yabook_vals_i_list = [item for letter in yabook_vals_i_final for item in letter]
+
+    yabook_vals_links = s.query(YABOOK.name).filter(Bookmark.yabook_id == YABOOK.id)
+    yabook_vals_l_final = yabook_vals_links.all()
+    yabook_vals_l_list = [item for letter in yabook_vals_l_final for item in letter]
 
     # BOOKCHOR
-    bookchor_vals = s.query(BOOKCHOR).filter(Bookmark.bookchor_id == BOOKCHOR.id)
-    bookchor_vals_final = bookchor_vals.all()
+    bookchor_vals_names = s.query(BOOKCHOR.name).filter(Bookmark.bookchor_id == BOOKCHOR.id)
+    bookchor_vals_n_final = bookchor_vals_names.all()
+    bookchor_vals_n_list = [item for letter in bookchor_vals_n_final for item in letter]
+
+    bookchor_vals_images = s.query(BOOKCHOR.image).filter(Bookmark.bookchor_id == BOOKCHOR.id)
+    bookchor_vals_i_final = bookchor_vals_images.all()
+    bookchor_vals_i_list = [item for letter in bookchor_vals_i_final for item in letter]
+
+    bookchor_vals_links = s.query(BOOKCHOR.name).filter(Bookmark.bookchor_id == BOOKCHOR.id)
+    bookchor_vals_l_final = bookchor_vals_links.all()
+    bookchor_vals_l_list = [item for letter in bookchor_vals_l_final for item in letter]
 
     return render_template("user_profile.html", username=loggedin_user.capitalize(), name=name_out.capitalize(), email=email_out.capitalize()
-                           , sfwa_books=sfwa_vals_final, yabook_books=yabook_vals_final, bookchor_books=bookchor_vals_final
+                           , sfwa_names=sfwa_vals_n_list, sfwa_images=sfwa_vals_i_list, sfwa_links=sfwa_vals_l_list, sfwa_len=len(sfwa_vals_n_list)
+                           , yabook_names=yabook_vals_n_list, yabook_images=yabook_vals_i_list, yabook_links=yabook_vals_l_list, yabook_len=len(yabook_vals_n_list)
+                           , bookchor_names=bookchor_vals_n_list, bookchor_images=bookchor_vals_i_list, bookchor_links=bookchor_vals_l_list, bookchor_len=len(bookchor_vals_n_list)
                            )
 
 @app.route('/books')
