@@ -303,7 +303,7 @@ def yabook_bookmark():
         result = query.first()
         if result is None:
             if '0' < rating < '6':
-                ratings_no = Ratings(sfwa_id=rating_index, rating=rating)
+                ratings_no = Ratings(yabook_id=rating_index, rating=rating)
                 db.add(ratings_no)
                 db.commit()
                 return redirect(url_for('yabook_books'))
@@ -332,7 +332,7 @@ def bookchor_bookmark():
         result = query.first()
         if result is None:
             if '0' < rating < '6':
-                ratings_no = Ratings(sfwa_id=rating_index, rating=rating)
+                ratings_no = Ratings(bookchor_id=rating_index, rating=rating)
                 db.add(ratings_no)
                 db.commit()
                 return redirect(url_for('bookchor_books'))
