@@ -125,21 +125,24 @@ def sfwa_books():
     id_result = id_query.all()
     id_out = [item for id in id_result for item in id]
 
-    rating_out = []
-    for i in range(1, 11):
-        rating_query = s.query(Ratings.rating).filter(Ratings.sfwa_id)
+    sfwa_rate_list = []
+    for i in range(1, len(id_out)+1):
+        rating_query = s.query(Ratings.rating).filter(Ratings.sfwa_id == i)
         rating_query_res = rating_query.all()
         rating_out = [item for rate in rating_query_res for item in rate]
-    if len(rating_out) == 0:
-        return render_template("sfwa_books.html", id_result=id_out, username=loggedin_user, book_titles=book_titles,
-                               images=images, len=len(images), links_to_web=links_to_web)
-    else:
-        rating_avg = sum(rating_out) / len(rating_out)
-        rating_avg = round(rating_avg, 2)
-        return render_template("sfwa_books.html", rating=rating_out, rating_avg=rating_avg, id_result=id_out,
-                               username=loggedin_user,
-                               book_titles=book_titles, images=images, len=len(images), links_to_web=links_to_web)
+        sfwa_rate_list.append(rating_out)
 
+    rating_list = []
+    for i in sfwa_rate_list:
+        if len(i) == 0:
+            rating_list.append("None")
+        else:
+            average_rating = sum(i)/len(i)
+            average_rating = round(average_rating, 2)
+            rating_list.append(average_rating)
+
+    return render_template("sfwa_books.html", rating_avg=rating_list, id_result=id_out, username=loggedin_user,
+                           book_titles=book_titles, images=images, len=len(images), links_to_web=links_to_web)
 
 @app.route('/yabook_books')
 def yabook_books():
@@ -178,19 +181,24 @@ def yabook_books():
     id_result = id_query.all()
     id_out = [item for id in id_result for item in id]
 
-    rating_out = []
-    for i in range(1, 11):
-        rating_query = s.query(Ratings.rating).filter(Ratings.yabook_id)
+    yabook_rate_list = []
+    for i in range(1, len(id_out)+1):
+        rating_query = s.query(Ratings.rating).filter(Ratings.yabook_id == i)
         rating_query_res = rating_query.all()
         rating_out = [item for rate in rating_query_res for item in rate]
-    if len(rating_out) == 0:
-        return render_template("yabook_books.html", id_result=id_out, username=loggedin_user, book_titles=book_titles,
-                               images=images, len=len(images),  links_to_web=links_to_web)
-    else:
-        rating_avg = sum(rating_out) / len(rating_out)
-        rating_avg = round(rating_avg, 2)
-        return render_template("yabook_books.html", rating=rating_out, rating_avg=rating_avg, id_result=id_out, username=loggedin_user,
-                               book_titles=book_titles, images=images, len=len(images), links_to_web=links_to_web)
+        yabook_rate_list.append(rating_out)
+
+    rating_list = []
+    for i in yabook_rate_list:
+        if len(i) == 0:
+            rating_list.append("None")
+        else:
+            average_rating = sum(i) / len(i)
+            average_rating = round(average_rating, 2)
+            rating_list.append(average_rating)
+
+    return render_template("yabook_books.html", rating_avg=rating_list, id_result=id_out, username=loggedin_user,
+                           book_titles=book_titles, images=images, len=len(images), links_to_web=links_to_web)
 
 @app.route('/bookchor_books')
 def bookchor_books():
@@ -232,20 +240,24 @@ def bookchor_books():
     id_result = id_query.all()
     id_out = [item for id in id_result for item in id]
 
-    rating_out = []
-    for i in range(1, 11):
-        rating_query = s.query(Ratings.rating).filter(Ratings.bookchor_id)
+    bookchor_rate_list = []
+    for i in range(1, len(id_out) + 1):
+        rating_query = s.query(Ratings.rating).filter(Ratings.bookchor_id == i)
         rating_query_res = rating_query.all()
         rating_out = [item for rate in rating_query_res for item in rate]
-    if len(rating_out) == 0:
-        return render_template("bookchar_books.html", id_result=id_out, username=loggedin_user, book_titles=book_titles,
-                               images=images, len=len(images), links_to_web=links_to_web)
-    else:
-        rating_avg = sum(rating_out) / len(rating_out)
-        rating_avg = round(rating_avg, 2)
-        return render_template("bookchar_books.html", rating=rating_out, rating_avg=rating_avg, id_result=id_out,
-                               username=loggedin_user,
-                               book_titles=book_titles, images=images, len=len(images), links_to_web=links_to_web)
+        bookchor_rate_list.append(rating_out)
+
+    rating_list = []
+    for i in bookchor_rate_list:
+        if len(i) == 0:
+            rating_list.append("None")
+        else:
+            average_rating = sum(i) / len(i)
+            average_rating = round(average_rating, 2)
+            rating_list.append(average_rating)
+
+    return render_template("bookchor_books.html", rating_avg=rating_list, id_result=id_out, username=loggedin_user,
+                           book_titles=book_titles, images=images, len=len(images), links_to_web=links_to_web)
 
 @app.route('/sfwa_bookmark', methods=['GET', 'POST'])
 def sfwa_bookmark():
