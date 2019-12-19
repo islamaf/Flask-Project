@@ -45,6 +45,9 @@
         {% if session['logged_in'] %}
         <h1>Enter the index of the book and click bookmark!</h1>
         <br>
+        <p>Rate here:</p>
+        <input type="text" name="rating_index" placeholder="Book Index" value="">
+        <input type="number" name="rating" placeholder="Rate from 1-5">
         <input type="text" name="index" value="">
         <input type="submit" name="submit-bookmark" value="Bookmark">
         {% endif %}
