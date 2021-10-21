@@ -1,4 +1,6 @@
 # Flask project for Book Marking  
+This is a project that parses books from few sites and merges them all on one platform to make it easier to choose new trending books and rate them.  
+
 ## IMPORTANT NOTES:  
 * The library `passlib.hash` is used to import encryption module `sha512_crypt`.
 * The library `requests` is used to get data from a specific website.
